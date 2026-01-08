@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react';
 import { MedicalNote, SOAPNote, TranscriptUtterance, PrefilledPatientData } from '@/types';
 import { processConsultation } from '@/services/assemblyaiService';
 import { generateKeyInsights } from '@/services/groqService';
+import { WavRecorder } from '@/utils/WavRecorder';
 
 interface ScribeSessionProps {
   prefilledData?: PrefilledPatientData;
@@ -68,40 +69,30 @@ const ScribeSession: React.FC<ScribeSessionProps> = ({ prefilledData, onCancel, 
     };
   }, [sessionState]);
 
+  const wavRecorderRef = useRef<WavRecorder | null>(null);
+
   const startRecording = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      audioStreamRef.current = stream;
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
+      const recorder = new WavRecorder();
+      await recorder.start(); // This requests mic access
+      wavRecorderRef.current = recorder;
 
-      mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) audioChunksRef.current.push(event.data);
-      };
-
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        setCapturedAudio(audioBlob);
-        setAudioUrl(URL.createObjectURL(audioBlob));
-        setSessionState('CONFIRMATION');
-      };
-
-      mediaRecorder.start();
       setSessionState('RECORDING');
       setError(null);
     } catch (err) {
-      setError('Audio input synchronization error.');
+      console.error('Mic Error:', err);
+      setError('Microphone access denied or error.');
     }
   };
 
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && sessionState === 'RECORDING') {
-      mediaRecorderRef.current.stop();
-      if (audioStreamRef.current) {
-        audioStreamRef.current.getTracks().forEach(track => track.stop());
-        audioStreamRef.current = null;
-      }
+  const stopRecording = async () => {
+    if (wavRecorderRef.current && sessionState === 'RECORDING') {
+      const audioBlob = await wavRecorderRef.current.stop();
+      wavRecorderRef.current = null;
+
+      setCapturedAudio(audioBlob);
+      setAudioUrl(URL.createObjectURL(audioBlob));
+      setSessionState('CONFIRMATION');
       setIsMuted(false);
     }
   };
@@ -136,7 +127,7 @@ const ScribeSession: React.FC<ScribeSessionProps> = ({ prefilledData, onCancel, 
           await onSave({
             id: Math.random().toString(36).substr(2, 9),
             patientId: patientName,
-            date: new Date().toLocaleString(),
+            date: new Date().toISOString(),
             type: 'Consultation',
             content: result.soapNote!,
             rawTranscript: result.fullText,
@@ -507,7 +498,7 @@ const ScribeSession: React.FC<ScribeSessionProps> = ({ prefilledData, onCancel, 
                   await onSave({
                     id: Math.random().toString(36).substr(2, 9),
                     patientId: patientName,
-                    date: new Date().toLocaleString(),
+                    date: new Date().toISOString(),
                     type: 'Consultation',
                     content: generatedNote,
                     rawTranscript: fullTranscript,
@@ -580,7 +571,7 @@ const ScribeSession: React.FC<ScribeSessionProps> = ({ prefilledData, onCancel, 
                   {utterances.map((u, i) => (
                     <div key={i} className="flex gap-4 group hover:bg-black/[0.02] p-2 rounded-xl transition-colors">
                       <span className={`text-[9px] font-black uppercase tracking-widest w-20 shrink-0 pt-0.5 truncate ${u.speaker === 'A' ? 'text-black' : 'text-black/40'}`}>
-                        {u.speaker === 'A' ? 'Doctor' : `Speaker ${u.speaker}`}
+                        {`Speaker ${u.speaker}`}
                       </span>
                       <p className="text-xs font-medium text-black/70 leading-relaxed group-hover:text-black transition-colors">{u.text}</p>
                     </div>

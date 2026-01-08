@@ -5,6 +5,7 @@ interface OnboardingProps {
     initialName?: string;
     initialEmail?: string;
     onComplete: (data: { name: string; specialty: string; country: string }) => void;
+    onExit: () => void;
 }
 
 const SPECIALTIES = [
@@ -29,7 +30,7 @@ const COUNTRIES = [
     'United Arab Emirates'
 ];
 
-const Onboarding: React.FC<OnboardingProps> = ({ initialName = '', initialEmail = '', onComplete }) => {
+const Onboarding: React.FC<OnboardingProps> = ({ initialName = '', initialEmail = '', onComplete, onExit }) => {
     const [name, setName] = useState(initialName);
     const [specialty, setSpecialty] = useState('');
     const [country, setCountry] = useState('');
@@ -42,10 +43,22 @@ const Onboarding: React.FC<OnboardingProps> = ({ initialName = '', initialEmail 
 
         if (!name || !specialty || !country) return;
 
+        // Enforce Dr. prefix
+        let finalName = name.trim();
+        // Check if starts with Dr. (case insensitive)
+        if (!finalName.toLowerCase().startsWith('dr.')) {
+            // If user typed "Dr John", handle that too
+            if (finalName.toLowerCase().startsWith('dr ')) {
+                finalName = `Dr. ${finalName.substring(3)}`;
+            } else {
+                finalName = `Dr. ${finalName}`;
+            }
+        }
+
         setIsLoading(true);
         // Simulate a small delay for better UX
         setTimeout(() => {
-            onComplete({ name, specialty, country });
+            onComplete({ name: finalName, specialty, country });
             setIsLoading(false);
         }, 800);
     };
@@ -56,6 +69,15 @@ const Onboarding: React.FC<OnboardingProps> = ({ initialName = '', initialEmail 
                 {/* Decorative Background Elements */}
                 <div className="absolute top-0 right-0 w-48 h-48 bg-slate-50 rounded-full blur-3xl -mr-24 -mt-24 pointer-events-none opacity-50" />
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-slate-50 rounded-full blur-3xl -ml-24 -mb-24 pointer-events-none opacity-50" />
+
+                {/* Exit / Sign Out Button */}
+                <button
+                    onClick={onExit}
+                    className="absolute top-4 right-4 text-[9px] font-bold uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors z-10 flex items-center gap-1"
+                >
+                    Sign Out
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                </button>
 
                 <div className="relative">
                     <div className="mb-6 text-center">
@@ -78,7 +100,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ initialName = '', initialEmail 
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    placeholder="Enter your full name"
+                                    placeholder="e.g. Dr. John Doe"
                                     className={`w-full bg-slate-50 border-2 rounded-xl py-2.5 pl-10 pr-4 text-xs font-bold text-slate-800 placeholder:text-slate-400 outline-none transition-all ${touched.name && !name ? 'border-red-100 bg-red-50 focus:border-red-200' : 'border-slate-100 focus:border-black/10 focus:bg-white focus:shadow-lg focus:shadow-black/5'}`}
                                 />
                             </div>

@@ -160,6 +160,22 @@ export default function Home() {
                 return;
             }
 
+            // Also save to public.doctors table
+            const { error: dbError } = await supabase
+                .from('doctors')
+                .upsert({
+                    id: authState.user.id,
+                    email: authState.user.email,
+                    name: data.name,
+                    specialty: data.specialty,
+                    country: data.country
+                }, { onConflict: 'id' });
+
+            if (dbError) {
+                console.error('Error saving doctor profile to DB:', dbError);
+                // We don't block here, as auth update succeeded
+            }
+
             // Update local state
             setAuthState(prev => ({
                 ...prev,
@@ -218,7 +234,7 @@ export default function Home() {
                 patientId = existingPatients[0].id;
                 // Update existing patient with any new info provided
                 await supabase.from('patients').update({
-                    last_seen: note.date.split(',')[0],
+                    last_seen: new Date(note.date).toLocaleDateString(),
                     age: (note as any).age || existingPatients[0].age,
                     gender: (note as any).gender || existingPatients[0].gender,
                     weight: (note as any).weight || existingPatients[0].weight,
@@ -240,7 +256,7 @@ export default function Home() {
                         blood_group: (note as any).bloodGroup || '',
                         nationality: (note as any).nationality || '',
                         language: (note as any).language || 'English',
-                        last_seen: note.date.split(',')[0]
+                        last_seen: new Date(note.date).toLocaleDateString()
                     })
                     .select()
                     .single();
@@ -399,6 +415,7 @@ export default function Home() {
                         initialName={authState.user?.name === 'Clinician' ? '' : authState.user?.name}
                         initialEmail={authState.user?.email}
                         onComplete={handleOnboardingComplete}
+                        onExit={handleLogout}
                     />
                 )
             }

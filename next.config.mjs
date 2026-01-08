@@ -2,7 +2,12 @@
 const nextConfig = {
     reactStrictMode: true,
     experimental: {
-        serverComponentsExternalPackages: ['pdf-parse', 'mammoth'],
+        serverComponentsExternalPackages: ['pdf-parse', 'mammoth', '@huggingface/transformers', 'onnxruntime-node'],
+    },
+    webpack: (config) => {
+        config.resolve.alias.canvas = false;
+        config.resolve.alias.encoding = false;
+        return config;
     },
 };
 

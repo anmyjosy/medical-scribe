@@ -255,64 +255,65 @@ const EditPatientModal: React.FC<EditPatientModalProps> = ({ patient, onClose, o
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/20 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}></div>
-      <div className="relative w-full max-w-lg bg-white rounded-[32px] shadow-2xl p-8 animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
-        <div className="flex justify-between items-start mb-6">
+      <div className="relative w-full max-w-lg bg-white rounded-[24px] shadow-2xl p-6 animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+        <div className="flex justify-between items-start mb-4">
           <div>
             <span className="text-[8px] font-black uppercase tracking-[0.4em] text-black mb-1 block">Edit Details</span>
-            <h2 className="text-2xl font-extrabold tracking-tighter text-slate-800">Patient Information</h2>
+            <h2 className="text-xl font-extrabold tracking-tighter text-slate-800">Patient Information</h2>
           </div>
           <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center hover:bg-slate-100 transition-colors text-slate-400">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>
 
-        <form onSubmit={handleSave} className="space-y-4">
-          <div className="space-y-2">
+        <form onSubmit={handleSave} className="space-y-3">
+          <div className="space-y-1">
             <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Full Name</label>
             <input type="text" required value={name} onChange={(e) => setName(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-sm font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
+              className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Age</label>
               <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Years"
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Gender</label>
               <select value={gender} onChange={(e) => setGender(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all appearance-none">
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all appearance-none">
                 <option value="">Select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
               </select>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Nationality</label>
               <input
                 type="text"
                 value={nationality}
                 onChange={(e) => setNationality(e.target.value)}
                 placeholder="Country"
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all"
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all"
               />
+
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Blood Group</label>
               <select value={bloodGroup} onChange={(e) => setBloodGroup(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all appearance-none">
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all appearance-none">
                 <option value="">Select</option>
                 {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(bg => (<option key={bg} value={bg}>{bg}</option>))}
               </select>
             </div>
-            <div className="space-y-2 col-span-2">
+            <div className="space-y-1 col-span-2">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Consultation Language</label>
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all appearance-none"
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all appearance-none"
               >
                 <option value="English">English</option>
                 <option value="Malayalam">Malayalam</option>
@@ -322,22 +323,22 @@ const EditPatientModal: React.FC<EditPatientModalProps> = ({ patient, onClose, o
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Weight</label>
               <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="kg"
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-[7px] font-black uppercase tracking-widest text-slate-400 ml-4">Height</label>
               <input type="text" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="cm"
-                className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
+                className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-xs font-bold text-slate-700 focus:border-black focus:bg-white outline-none transition-all" />
             </div>
           </div>
 
-          <div className="pt-4">
+          <div className="pt-2">
             <button type="submit"
-              className="w-full py-4 bg-black text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] shadow-xl shadow-black/10 hover:bg-slate-800 transition-all">
+              className="w-full py-3 bg-black text-white rounded-xl text-[10px] font-black uppercase tracking-[0.3em] shadow-xl shadow-black/10 hover:bg-slate-800 transition-all">
               Save Changes
             </button>
           </div>
@@ -358,6 +359,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
   const [isTranslateOpen, setIsTranslateOpen] = useState(false);
   const [translatedData, setTranslatedData] = useState<any>(null);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [isRAGMode, setIsRAGMode] = useState(false);
 
   // Sync selectedPatient with latest data from patients prop
   useEffect(() => {
@@ -446,6 +448,9 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
   // Handle Translation
   useEffect(() => {
     const translateContent = async () => {
+      // Optimize: If target language matches source, skip translation
+      const sourceLanguage = selectedPatient?.language || 'English';
+
       if (translationLanguage === 'Original' || !selectedConsultation) {
         setTranslatedData(null);
         return;
@@ -456,12 +461,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
         const { translateText } = await import('../services/groqService');
         const content = selectedConsultation.content;
         const utterances = selectedConsultation.utterances || [];
-        const insights = selectedConsultation.keyInsights || [
-          "Patient shows good adherence to the prescribed medication regimen.",
-          "Blood pressure levels have stabilized compared to the previous visit.",
-          "Recommended to increase daily physical activity to 30 minutes.",
-          "Follow-up scheduled in 2 weeks to monitor progress."
-        ];
+        const insights = selectedConsultation.keyInsights || [];
 
         // 1. Translate Clinical Summary (Subjective, Assessment, Plan)
         // Check if we have a direct 'summary' field (new format) or 'subjective' (legacy)
@@ -480,18 +480,24 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
         const translatedInsights = translatedInsightsStr.split(' ||| ').map(s => s.trim());
 
         // 3. Translate Transcript (Utterances)
-        // This can be large, so we might need to chunk it. For now, let's try one big batch with delimiters.
-        // If > 20 utterances, maybe take top 20 or chunk. Let's try top 30 for performance assurance.
-        const transcriptText = utterances.slice(0, 30).map(u => u.text).join(' ||| ');
+        // Optimization: If the target language matches the specific patient language (source audio), 
+        // DO NOT translate the transcript (keep original).
+        // Only translate transcript if languages differ (e.g. English summary -> Malayalam input is fine, but Malayalam audio -> Malayalam target should not change).
         let translatedUtterances = [...utterances];
 
-        if (transcriptText) {
-          const translatedTranscriptStr = await translateText(transcriptText, translationLanguage);
-          const translatedTexts = translatedTranscriptStr.split(' ||| ');
-          translatedUtterances = utterances.map((u, i) => ({
-            ...u,
-            text: i < 30 ? (translatedTexts[i]?.trim() || u.text) : u.text
-          }));
+        if (translationLanguage !== sourceLanguage && utterances.length > 0) {
+          // This can be large, so we might need to chunk it. For now, let's try one big batch with delimiters.
+          // If > 20 utterances, maybe take top 20 or chunk. Let's try top 30 for performance assurance.
+          const transcriptText = utterances.slice(0, 30).map(u => u.text).join(' ||| ');
+
+          if (transcriptText) {
+            const translatedTranscriptStr = await translateText(transcriptText, translationLanguage);
+            const translatedTexts = translatedTranscriptStr.split(' ||| ');
+            translatedUtterances = utterances.map((u, i) => ({
+              ...u,
+              text: i < 30 ? (translatedTexts[i]?.trim() || u.text) : u.text
+            }));
+          }
         }
 
         // 4. Translate Prescription (if available)
@@ -592,7 +598,6 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
 
   const handleAskAI = async () => {
     if (!aiQuestion.trim() || !selectedConsultation) return;
-    setIsAISearching(true);
 
     // Optimistic UI Update
     const userMessage: ChatMessage = {
@@ -600,33 +605,84 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
       role: 'user',
       text: aiQuestion
     };
+
     setChatHistory(prev => [...prev, userMessage]);
     setAIQuestion('');
+    setIsAISearching(true); // Using existing loading state for UI spinner if desired
+    setIsGenerating(true);  // Using new loading state
 
     try {
-      // 1. Fetch file context (sidecar text files)
-      const { getPatientFileContext } = await import('../services/fileUploadService');
-      const fileContext = await getPatientFileContext(selectedPatient?.id || '', selectedConsultation?.id);
+      let context = '';
 
-      console.log('Context characters fetched:', fileContext.length);
+      if (isRAGMode && selectedPatient) {
+        // --- RAG MODE: Full History ---
 
-      // 2. Build Context String
-      const context = `
-      Patient Name: ${selectedPatient?.name}
-      Age: ${selectedPatient?.age || 'Unknown'}
-      Gender: ${selectedPatient?.gender || 'Unknown'}
-      Condition/Notes: ${selectedConsultation.content.subjective.chiefComplaint || 'N/A'}
-      
-      --- RECENT CONSULTATION SUMMARY ---
-      Subjective: ${selectedConsultation.content.subjective.historyOfPresentIllness}
-      Assessment: ${selectedConsultation.content.assessment}
-      Plan: ${selectedConsultation.content.plan}
-      
-      --- UPLOADED DOCUMENTS CONTENT ---
-      ${fileContext || 'No additional documents.'}
-      `;
+        // 1. Summarize Past Consultations
+        // Filter out the *current* consultation so we don't duplicate it in "History"
+        // Sort by date ascending (Oldest -> Newest)
+        const pastConsultations = selectedPatient.consultations
+          .filter(c => c.id !== selectedConsultation.id)
+          .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-      // 3. Ask Groq
+        const historyContext = pastConsultations.map((c, index) => {
+          // Format date unambiguously
+          const dateStr = new Date(c.date).toLocaleDateString('en-GB', {
+            day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+          });
+
+          return `[Past Consultation #${index + 1}]
+Date: ${dateStr} | Type: ${c.type}
+Diagnosis: ${c.content.assessment}
+Summary: ${c.content.summary || c.content.subjective?.historyOfPresentIllness || 'N/A'}
+Plan: ${c.content.plan}
+-------------------`;
+        }).join('\n');
+
+        // 2. Fetch Global File Context
+        const { getPatientFileContext } = await import('../services/fileUploadService');
+        const fileContext = await getPatientFileContext(selectedPatient.id);
+
+        context = `
+You are an advanced medical AI assistant.
+
+=== PATIENT ===
+Name: ${selectedPatient.name} | Age: ${selectedPatient.age} | Gender: ${selectedPatient.gender}
+
+=== PAST MEDICAL HISTORY (Do NOT confuse with Current) ===
+${historyContext.length > 0 ? historyContext : 'No past consultations.'}
+
+=== UPLOADED PATIENT FILES ===
+${fileContext}
+
+=== CURRENT ACTIVE SESSION ===
+Date: ${new Date(selectedConsultation.date).toLocaleDateString('en-GB')}
+Content: ${JSON.stringify(selectedConsultation.content)}
+
+INSTRUCTIONS:
+1. You are answering questions about the patient's history.
+2. VERIFY SPECIFIC RECORDS before claiming a symptom exists.
+3. If Consultation #1 says "No chest pain" and #3 says "Chest pain", DO NOT say "Consistent chest pain". Say "Chest pain appeared in #3 but was absent in #1".
+4. When listing history, use the format: "Date: Event".
+5. Be extremely precise with chronology.
+`;
+      } else {
+        // --- STANDARD MODE ---
+        const { getPatientFileContext } = await import('../services/fileUploadService');
+        const fileContext = await getPatientFileContext(selectedPatient?.id || '', selectedConsultation?.id);
+
+        context = `
+You are a medical assistant helping with the CURRENT consultation only.
+
+Patient: ${selectedPatient?.name}
+Current Consultation:
+${JSON.stringify(selectedConsultation?.utterances || selectedConsultation?.content)}
+
+Attached Files:
+${fileContext}
+`;
+      }
+
+      const { askGroq } = await import('../services/groqService'); // Ensure import if not at top, or rely on top lvl
       const response = await askGroq(userMessage.text, context);
 
       const aiMessage: ChatMessage = {
@@ -639,11 +695,12 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
     } catch (error) {
       console.error('AI Chat Error:', error);
       setChatHistory(prev => [...prev, {
-        id: (Date.now() + 1).toString(),
+        id: Date.now().toString(),
         role: 'ai',
-        text: "I'm sorry, I couldn't process your request at the moment."
+        text: "I'm sorry, I encountered an error analyzing the medical data."
       }]);
     } finally {
+      setIsGenerating(false);
       setIsAISearching(false);
     }
   };
@@ -952,10 +1009,27 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
                 <div className="flex items-center justify-between mb-2">
                   <div className="px-2 py-0.5 bg-black/5 text-black text-[9px] font-extrabold rounded-md tracking-widest uppercase flex items-center gap-2">
                     E-Health Record
-                    {isTranslating && <Loader2 size={10} className="animate-spin text-black/50" />}
                   </div>
 
-                  <div className="flex items-center gap-3 relative">
+
+                  {/* Large Translation Loader Overlay */}
+                  {isTranslating && (
+                    <div className="fixed inset-0 z-[60] bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
+                      <div className="flex flex-col items-center gap-6">
+                        <div className="relative">
+                          <div className="w-16 h-16 border-4 border-slate-100 rounded-full"></div>
+                          <div className="w-16 h-16 border-4 border-blue-600 rounded-full border-t-transparent animate-spin absolute top-0 left-0"></div>
+                          <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue-600 animate-pulse" size={24} />
+                        </div>
+                        <div className="text-center space-y-2">
+                          <h3 className="text-xl font-black text-slate-800 tracking-tight">Translating Record...</h3>
+                          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Converting to {translationLanguage}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-3">
                     {/* Original Button */}
                     <button
                       onClick={() => setTranslationLanguage('Original')}
@@ -1013,7 +1087,16 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-1.5 text-slate-400">
                         <Clock size={12} />
-                        <span className="text-[11px] font-bold uppercase tracking-tighter">{selectedConsultation.date}</span>
+                        <span className="text-[11px] font-bold uppercase tracking-tighter">
+                          {new Date(selectedConsultation.date).toLocaleDateString(undefined, {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1082,7 +1165,16 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
                         {/* Conversation */}
                         <div className="flex-1 overflow-y-auto custom-scrollbar space-y-1 pr-2">
                           {(translatedData?.utterances || selectedConsultation.utterances)?.map((utterance: any, i: number) => {
-                            const isDoctor = utterance.speaker === 'A';
+                            const currentLanguage = selectedPatient?.language || 'English';
+                            let speakerLabel = utterance.speaker;
+
+                            // Auto-label A as Doctor for non-Malayalam languages
+                            if (currentLanguage !== 'Malayalam' && utterance.speaker === 'A') {
+                              speakerLabel = 'Doctor';
+                            } else {
+                              // Fallback for Malayalam or other speakers
+                              speakerLabel = utterance.speaker.length === 1 ? `Speaker ${utterance.speaker}` : utterance.speaker;
+                            }
                             const formatTime = (ms: number) => {
                               const seconds = Math.floor(ms / 1000);
                               const mins = Math.floor(seconds / 60);
@@ -1094,25 +1186,20 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
                               <div
                                 key={i}
                                 onClick={() => setSeekTime(utterance.start / 1000)}
-                                className={`flex gap-3 p-3 rounded-2xl cursor-pointer transition-all group hover:bg-slate-50 ${isDoctor ? '' : ''}`}
+                                className={`flex gap-3 p-3 rounded-2xl cursor-pointer transition-all group hover:bg-slate-50`}
                               >
                                 {/* Avatar */}
-                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-[10px] font-black shrink-0 ${isDoctor
-                                  ? 'bg-black text-white'
-                                  : 'bg-slate-100 text-slate-500'
-                                  }`}>
-                                  {isDoctor ? 'DR' : utterance.speaker.charAt(0).toUpperCase()}
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-[10px] font-black shrink-0 ${speakerLabel === 'Doctor' ? 'bg-black text-white' : 'bg-slate-100 text-slate-500'}`}>
+                                  {speakerLabel === 'Doctor' ? 'DR' : utterance.speaker.charAt(0).toUpperCase()}
                                 </div>
 
                                 {/* Content */}
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-1">
                                     <span
-                                      className={`text-[10px] font-bold uppercase tracking-wider hover:underline cursor-pointer ${isDoctor ? 'text-black' : 'text-slate-400'
-                                        }`}
+                                      className={`text-[10px] font-bold uppercase tracking-wider hover:underline cursor-pointer text-slate-400`}
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        if (isDoctor) return; // Don't rename doctor for now
                                         const newName = window.prompt("Rename speaker:", utterance.speaker);
                                         if (newName && newName !== utterance.speaker) {
                                           const updatedUtterances = selectedConsultation.utterances?.map(u =>
@@ -1128,18 +1215,15 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
                                           }
                                         }
                                       }}
-                                      title={isDoctor ? "Doctor" : "Click to rename speaker"}
+                                      title={"Click to rename speaker"}
                                     >
-                                      {isDoctor ? 'Doctor' : (utterance.speaker.length === 1 ? `Speaker ${utterance.speaker}` : utterance.speaker)}
+                                      {speakerLabel}
                                     </span>
                                     <span className="text-[9px] text-slate-300 font-medium">
                                       {formatTime(utterance.start)}
                                     </span>
                                   </div>
-                                  <p className={`text-sm leading-relaxed ${isDoctor
-                                    ? 'text-slate-700 font-medium'
-                                    : 'text-slate-500'
-                                    }`}>
+                                  <p className={`text-sm leading-relaxed text-slate-500`}>
                                     {utterance.text}
                                   </p>
                                 </div>
@@ -1524,7 +1608,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
             )}
           </div>
         </div>
-      </main>
+      </main >
 
       {isModalOpen && (
         <NewPatientModal
@@ -1538,108 +1622,137 @@ const Dashboard: React.FC<DashboardProps> = ({ user, patients, onLogout, onStart
       )}
 
       {/* AI Chat Drawer */}
-      {isAIChatOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity"
-            onClick={() => setIsAIChatOpen(false)}
-          />
-          <div className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-50 border-l border-slate-100 p-4 md:p-6 flex flex-col animate-in slide-in-from-right duration-300">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center text-white shadow-sm shadow-black/20">
-                  <Sparkles size={20} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-800">AI Assistant</h3>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsAIChatOpen(false)}
-                className="p-2 hover:bg-slate-50 rounded-xl text-slate-400 hover:text-slate-600 transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto custom-scrollbar -mx-2 px-2 space-y-4 mb-6">
-              <div className="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100 text-sm text-slate-600 leading-relaxed shadow-sm">
-                Hello! I've analyzed the consultation with {selectedPatient?.name || 'the patient'}. You can ask me about symptoms, diagnosis, or treatment plan.
-              </div>
-              {chatHistory.map(msg => (
-                <div key={msg.id} className={`p-4 rounded-2xl text-sm leading-relaxed shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300 ${msg.role === 'user' ? 'bg-black text-white rounded-tr-none ml-8' : 'bg-slate-50 text-slate-600 rounded-tl-none mr-8 border border-slate-100'}`}>
-                  {msg.text}
-                </div>
-              ))}
-
-              {isAISearching && (
-                <div className="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100 text-sm text-slate-600 leading-relaxed shadow-sm w-fit">
-                  <div className="flex gap-1">
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+      {
+        isAIChatOpen && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity"
+              onClick={() => setIsAIChatOpen(false)}
+            />
+            <div className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-50 border-l border-slate-100 p-4 md:p-6 flex flex-col animate-in slide-in-from-right duration-300">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center text-white shadow-sm shadow-black/20">
+                    <Sparkles size={20} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-800">AI Assistant</h3>
                   </div>
                 </div>
-              )}
-              <div ref={chatEndRef} />
-            </div>
+                <button
+                  onClick={() => setIsAIChatOpen(false)}
+                  className="p-2 hover:bg-slate-50 rounded-xl text-slate-400 hover:text-slate-600 transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
 
-            <div className="relative">
-              <input
-                type="text"
-                value={aiQuestion}
-                onChange={(e) => setAIQuestion(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleAskAI()}
-                placeholder="Ask a question..."
-                className="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-black/5 focus:border-slate-400 transition-all pr-12 shadow-sm"
-              />
-              <button
-                onClick={handleAskAI}
-                disabled={isAISearching || !aiQuestion.trim()}
-                className="absolute right-2 top-2 p-2 bg-black text-white rounded-xl shadow-md shadow-slate-200 hover:bg-slate-800 disabled:opacity-50 disabled:shadow-none transition-all"
-              >
-                {isAISearching ? <RefreshCcw size={16} className="animate-spin" /> : <ChevronRight size={18} />}
-              </button>
+              {/* RAG Mode Toggle */}
+              <div className="mb-6 bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-lg ${isRAGMode ? 'bg-[#552483] text-white' : 'bg-white text-slate-400 border border-slate-200'}`}>
+                    <BrainCircuit size={16} />
+                  </div>
+                  <div>
+                    <p className={`text-xs font-bold uppercase tracking-wider ${isRAGMode ? 'text-[#552483]' : 'text-slate-500'}`}>
+                      {isRAGMode ? 'Full Medical Memory' : 'Current Session Only'}
+                    </p>
+                    <p className="text-[10px] text-slate-400 font-medium">
+                      {isRAGMode ? 'Analyzing past history & files' : 'Focused on this consultation'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsRAGMode(!isRAGMode)}
+                  className={`w-10 h-6 rounded-full transition-colors relative ${isRAGMode ? 'bg-[#552483]' : 'bg-slate-200'}`}
+                >
+                  <div className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform ${isRAGMode ? 'translate-x-4' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto custom-scrollbar -mx-2 px-2 space-y-4 mb-6">
+                <div className="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100 text-sm text-slate-600 leading-relaxed shadow-sm">
+                  Hello! I've analyzed the consultation with {selectedPatient?.name || 'the patient'}. You can ask me about symptoms, diagnosis, or treatment plan.
+                </div>
+                {chatHistory.map(msg => (
+                  <div key={msg.id} className={`p-4 rounded-2xl text-sm leading-relaxed shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300 ${msg.role === 'user' ? 'bg-black text-white rounded-tr-none ml-8' : 'bg-slate-50 text-slate-600 rounded-tl-none mr-8 border border-slate-100'}`}>
+                    {msg.text}
+                  </div>
+                ))}
+
+                {isAISearching && (
+                  <div className="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100 text-sm text-slate-600 leading-relaxed shadow-sm w-fit">
+                    <div className="flex gap-1">
+                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+
+              <div className="relative">
+                <input
+                  type="text"
+                  value={aiQuestion}
+                  onChange={(e) => setAIQuestion(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAskAI()}
+                  placeholder="Ask a question..."
+                  className="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-black/5 focus:border-slate-400 transition-all pr-12 shadow-sm"
+                />
+                <button
+                  onClick={handleAskAI}
+                  disabled={isAISearching || !aiQuestion.trim()}
+                  className="absolute right-2 top-2 p-2 bg-black text-white rounded-xl shadow-md shadow-slate-200 hover:bg-slate-800 disabled:opacity-50 disabled:shadow-none transition-all"
+                >
+                  {isAISearching ? <RefreshCcw size={16} className="animate-spin" /> : <ChevronRight size={18} />}
+                </button>
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )
+      }
 
       {/* Floating Action Button (Detail View) - New Session */}
-      {selectedPatient && !isSidebarOpen && (
-        <button
-          onClick={() => {
-            console.log('FAB CLICKED. Patient:', selectedPatient);
-            console.log('FAB Language Value:', selectedPatient.language);
-            onStartScribe({
-              ...selectedPatient, // Spread all properties first
-              age: selectedPatient.age?.toString() || '',
-              bloodGroup: selectedPatient.bloodGroup || '',
-              weight: selectedPatient.weight || '',
-              height: selectedPatient.height || '',
-              gender: selectedPatient.gender || 'Unknown',
-              nationality: selectedPatient.nationality || '',
-              language: selectedPatient.language || 'English' // Explicitly overwrite/set language
-            });
-          }}
-          className="fixed bottom-6 right-6 w-14 h-14 bg-black text-white rounded-full flex items-center justify-center shadow-2xl shadow-black/30 z-40 hover:scale-105 active:scale-95 transition-all md:right-8 md:bottom-8"
-        >
-          <Plus size={24} />
-        </button>
-      )}
+      {
+        selectedPatient && !isSidebarOpen && (
+          <button
+            onClick={() => {
+              console.log('FAB CLICKED. Patient:', selectedPatient);
+              console.log('FAB Language Value:', selectedPatient.language);
+              onStartScribe({
+                ...selectedPatient, // Spread all properties first
+                age: selectedPatient.age?.toString() || '',
+                bloodGroup: selectedPatient.bloodGroup || '',
+                weight: selectedPatient.weight || '',
+                height: selectedPatient.height || '',
+                gender: selectedPatient.gender || 'Unknown',
+                nationality: selectedPatient.nationality || '',
+                language: selectedPatient.language || 'English' // Explicitly overwrite/set language
+              });
+            }}
+            className="fixed bottom-6 right-6 w-14 h-14 bg-black text-white rounded-full flex items-center justify-center shadow-2xl shadow-black/30 z-40 hover:scale-105 active:scale-95 transition-all md:hidden"
+          >
+            <Plus size={24} />
+          </button>
+        )
+      }
 
       {/* Edit Patient Modal */}
-      {isEditModalOpen && selectedPatient && (
-        <EditPatientModal
-          patient={selectedPatient}
-          onClose={() => setIsEditModalOpen(false)}
-          onSave={(updates) => {
-            onUpdatePatient(selectedPatient.id, updates);
-            setIsEditModalOpen(false);
-          }}
-        />
-      )}
-    </div>
+      {
+        isEditModalOpen && selectedPatient && (
+          <EditPatientModal
+            patient={selectedPatient}
+            onClose={() => setIsEditModalOpen(false)}
+            onSave={(updates) => {
+              onUpdatePatient(selectedPatient.id, updates);
+              setIsEditModalOpen(false);
+            }}
+          />
+        )
+      }
+    </div >
   );
 };
 

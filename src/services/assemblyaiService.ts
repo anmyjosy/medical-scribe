@@ -62,7 +62,30 @@ export const processConsultation = async (
     const { text, utterances } = await transcribeWithDiarization(audioBlob, language);
 
     // Step 2: Generate SOAP note from transcript
-    const soapNote = await generateSOAPNote(text, utterances);
+    let soapNote: SOAPNote;
+
+    if (!text || text.trim().length === 0) {
+        console.warn('Transcription text is empty. Skipping SOAP generation.');
+        soapNote = {
+            subjective: {
+                chiefComplaint: 'No speech detected',
+                historyOfPresentIllness: 'Audio recording did not contain clear speech.'
+            },
+            objective: {
+                vitals: {
+                    temperature: 'Not recorded',
+                    bloodPressure: 'Not recorded',
+                    pulse: 'Not recorded',
+                    respiratoryRate: 'Not recorded'
+                },
+                appearance: ['Not documented']
+            },
+            assessment: 'No diagnosis possible',
+            plan: 'Please retry recording with clearer speech.'
+        };
+    } else {
+        soapNote = await generateSOAPNote(text, utterances);
+    }
 
     return {
         soapNote,

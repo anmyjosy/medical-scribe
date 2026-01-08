@@ -97,8 +97,8 @@ export const PrescriptionPad: React.FC<PrescriptionPadProps> = ({
                     </div>
 
                     {/* Patient Info */}
-                    <div className="p-6 md:p-8 pb-4">
-                        <div className="flex flex-wrap gap-y-4 text-sm text-slate-600 border-b border-slate-100 pb-6">
+                    <div className="px-6 md:px-8 pt-4 pb-1">
+                        <div className="flex flex-wrap gap-y-4 text-sm text-slate-600 border-b border-slate-100 pb-2">
                             <div className="w-full md:w-1/2 md:pr-4">
                                 <span className="font-bold text-slate-400 text-[10px] md:text-xs uppercase tracking-wider block mb-1">Patient Name</span>
                                 <span className="font-bold text-slate-900 border-b border-slate-200 block pb-1 w-full text-base md:text-sm">{patient.name}</span>
@@ -121,8 +121,8 @@ export const PrescriptionPad: React.FC<PrescriptionPadProps> = ({
                     </div>
 
                     {/* Rx Body */}
-                    <div className="p-6 md:p-8 flex-1">
-                        <div className="mb-4 md:mb-6">
+                    <div className="px-6 md:px-8 py-4 flex-1">
+                        <div className="mb-3 md:mb-4">
                             <h2 className="text-3xl md:text-4xl font-black text-sky-600 font-serif italic">Rx</h2>
                         </div>
 

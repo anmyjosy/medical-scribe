@@ -143,14 +143,31 @@ const MetricCard = ({ icon, label, value, color, bgColor }: any) => (
     </div>
 );
 
-const TimelineItem = ({ date, title, active = false }: any) => (
-    <div className="flex items-start gap-3 relative group hover:opacity-80 transition-opacity">
-        <div className={`mt-1 w-[13px] h-[13px] rounded-full shrink-0 border-2 border-white shadow-sm z-[1] ${active ? 'bg-black' : 'bg-slate-200 group-hover:bg-slate-300'}`} />
-        <div className="min-w-0 flex-1">
-            <p className={`text-sm md:text-[10px] font-bold leading-tight line-clamp-2 ${active ? 'text-slate-800' : 'text-slate-400 group-hover:text-slate-600'}`}>{title}</p>
-            <p className="text-xs md:text-[9px] font-medium text-slate-400/80 mt-0.5">{date.split('•')[0]}</p>
+const TimelineItem = ({ date, title, active = false }: any) => {
+    let displayDate = date;
+    try {
+        // Try parsing as ISO or standard date
+        const d = new Date(date);
+        if (!isNaN(d.getTime())) {
+            displayDate = d.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+    } catch (e) {
+        displayDate = date.split('•')[0];
+    }
+
+    return (
+        <div className="flex items-start gap-3 relative group hover:opacity-80 transition-opacity">
+            <div className={`mt-1 w-[13px] h-[13px] rounded-full shrink-0 border-2 border-white shadow-sm z-[1] ${active ? 'bg-black' : 'bg-slate-200 group-hover:bg-slate-300'}`} />
+            <div className="min-w-0 flex-1">
+                <p className={`text-sm md:text-[10px] font-bold leading-tight line-clamp-2 ${active ? 'text-slate-800' : 'text-slate-400 group-hover:text-slate-600'}`}>{title}</p>
+                <p className="text-xs md:text-[9px] font-medium text-slate-400/80 mt-0.5">{displayDate}</p>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default Sidebar;
